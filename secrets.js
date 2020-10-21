@@ -30,10 +30,10 @@
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like environments that support module.exports,
         // like Node.
-        module.exports = factory(require("crypto"))
+        module.exports = factory(require("expo-random"))
     } else {
         // Browser globals (root is window)
-        root.secrets = factory(root.crypto)
+        root.secrets = factory(root.expo-random)
     }
 })(this, function(crypto) {
     "use strict"
@@ -190,7 +190,7 @@
     function hasCryptoRandomBytes() {
         if (
             typeof crypto === "object" &&
-            typeof crypto.randomBytes === "function"
+            typeof crypto.getRandomBytes === "function"
         ) {
             return true
         }
@@ -250,7 +250,7 @@
             bytes = Math.ceil(bits / 8)
 
             while (str === null) {
-                buf = crypto.randomBytes(bytes)
+                buf = crypto.getRandomBytes(bytes)
                 str = construct(bits, buf.toString("hex"), radix, size)
             }
 
